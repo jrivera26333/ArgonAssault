@@ -10,6 +10,14 @@ public class Player : MonoBehaviour
     [Tooltip("In m")] [SerializeField] float xRange = 5f;
     [Tooltip("In m")] [SerializeField] float yRange = 5f;
 
+    [SerializeField] float positionPitchFactor = -5f;
+    [SerializeField] float controlPitchFactor = -5f;
+    float xThrow, yThrow;
+
+
+    [SerializeField] float positionYawFactor = -5f;
+    [SerializeField] float controlRollFactor = -5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,13 +33,21 @@ public class Player : MonoBehaviour
 
     private void ProcessRotation()
     {
-        transform.localRotation = Quaternion.Euler(-30f, 30f, 0f);
+        float pitchDueToPosition = transform.localPosition.y * positionPitchFactor; //We are adding a scale to the position thats clamped and then getting that value an using that for the rotation
+        float pitchDueToControlThrow = yThrow * controlPitchFactor; //Since yThrow will be from -1 to 1 we want to add a pitch factor which over time will shoot back the ship to look straight ahead
+
+        float pitch = pitchDueToPosition + pitchDueToControlThrow; //Note our yThrow goes to 0 so it will bounce back
+
+        float yaw = transform.localPosition.x * positionYawFactor;
+        float roll = xThrow * controlRollFactor;
+
+        transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
     }
 
     private void ProcessTranslation()
     {
-        float xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
-        float yThrow = CrossPlatformInputManager.GetAxis("Vertical");
+        xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
+        yThrow = CrossPlatformInputManager.GetAxis("Vertical");
 
         float xOffSet = xThrow * xSpeed * Time.deltaTime;
         float yOffSet = yThrow * xSpeed * Time.deltaTime;
