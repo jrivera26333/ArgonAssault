@@ -18,12 +18,6 @@ public class Player : MonoBehaviour
     [SerializeField] float positionYawFactor = -5f;
     [SerializeField] float controlRollFactor = -5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -46,18 +40,18 @@ public class Player : MonoBehaviour
 
     private void ProcessTranslation()
     {
-        xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
+        xThrow = CrossPlatformInputManager.GetAxis("Horizontal"); //-1 to 1
         yThrow = CrossPlatformInputManager.GetAxis("Vertical");
 
         float xOffSet = xThrow * xSpeed * Time.deltaTime;
         float yOffSet = yThrow * xSpeed * Time.deltaTime;
 
-        float rawXpos = transform.localPosition.x + xOffSet;
+        float rawXpos = transform.localPosition.x + xOffSet; //Grabbing our value and adding it to our local pos x
         float clampedXPos = Mathf.Clamp(rawXpos, -xRange, xRange);
 
         float rawYpos = transform.localPosition.y + yOffSet;
         float clampedYPos = Mathf.Clamp(rawYpos, -yRange, yRange);
 
-        transform.localPosition = new Vector3(clampedXPos, clampedYPos, transform.localPosition.z);
+        transform.localPosition = new Vector3(clampedXPos, clampedYPos, transform.localPosition.z); //Then we add our changed value to our ship
     }
 }
