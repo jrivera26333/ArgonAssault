@@ -1177,6 +1177,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 4149144383726229549, guid: a47001285d862934f8e849eda655ade2,
+        type: 3}
+      propertyPath: m_Name
+      value: Bullets Left
+      objectReference: {fileID: 0}
     - target: {fileID: 4151043907384693180, guid: a47001285d862934f8e849eda655ade2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1237,6 +1242,11 @@ PrefabInstance:
       propertyPath: deathFX
       value: 
       objectReference: {fileID: 281109893}
+    - target: {fileID: 7764266640965180789, guid: a47001285d862934f8e849eda655ade2,
+        type: 3}
+      propertyPath: m_Name
+      value: Bullets Right
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a47001285d862934f8e849eda655ade2, type: 3}
 --- !u!4 &4149144382610041597 stripped
