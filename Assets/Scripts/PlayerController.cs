@@ -38,22 +38,19 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButton("Fire"))
         {
-            ActivateGuns();
+            SetGunsActive(true);
         }
         else
-            DeavtivateGun();
+            SetGunsActive(false);
     }
 
-    private void DeavtivateGun()
+    private void SetGunsActive(bool isActive)
     {
         foreach (GameObject gun in guns)
-            gun.SetActive(false);
-    }
-
-    private void ActivateGuns()
-    {
-        foreach (GameObject gun in guns)
-            gun.SetActive(true);
+        {
+            var gunEmission = gun.GetComponent<ParticleSystem>().emission;
+            gunEmission.enabled = isActive;
+        }           
     }
 
     void OnPlayerDeath() //Call by string refernce
